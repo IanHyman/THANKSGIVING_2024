@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanksgiving Dinner Sign-Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #d2691e;
+        }
+        h2 {
+            color: #ff6347;
+            border-bottom: 2px solid #f5deb3;
+            padding-bottom: 5px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        input, select {
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #ff6347;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        button:hover {
+            background-color: #d2691e;
+        }
+        .sign-up-list {
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f5deb3;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thanksgiving Dinner Sign-Up</h1>
+        <p>Please sign up below to let us know what dish you're bringing to Thanksgiving dinner!</p>
+        
+        <form id="signupForm">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="dish">Dish You'll Bring:</label>
+            <input type="text" id="dish" name="dish" required>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="Main Dish">Main Dish</option>
+                <option value="Side Dish">Side Dish</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Drink">Drink</option>
+            </select>
+
+            <button type="button" onclick="addSignUp()">Sign Up</button>
+        </form>
+
+        <div class="sign-up-list">
+            <h2>Who's Bringing What:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Dish</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody id="signupList">
+                    <!-- Sign-ups will appear here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle adding new sign-ups
+        function addSignUp() {
+            const name = document.getElementById('name').value;
+            const dish = document.getElementById('dish').value;
+            const category = document.getElementById('category').value;
+
+            if (name && dish && category) {
+                const table = document.getElementById('signupList');
+                const row = document.createElement('tr');
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = name;
+                row.appendChild(nameCell);
+
+                const dishCell = document.createElement('td');
+                dishCell.textContent = dish;
+                row.appendChild(dishCell);
+
+                const categoryCell = document.createElement('td');
+                categoryCell.textContent = category;
+                row.appendChild(categoryCell);
+
+                table.appendChild(row);
+
+                // Clear the form after submission
+                document.getElementById('signupForm').reset();
+            } else {
+                alert('Please fill out all fields.');
+            }
+        }
+    </script>
+</body>
+</html>
