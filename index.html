@@ -116,60 +116,30 @@
         </div>
     </div>
 
-    <script>
-        // JavaScript to handle adding new sign-ups
-        function addSignUp() {
-            const name = document.getElementById('name').value;
-            const dish = document.getElementById('dish').value;
-            const category = document.getElementById('category').value;
-
-            if (name && dish && category) {
-                const table = document.getElementById('signupList');
-                const row = document.createElement('tr');
-
-                const nameCell = document.createElement('td');
-                nameCell.textContent = name;
-                row.appendChild(nameCell);
-
-                const dishCell = document.createElement('td');
-                dishCell.textContent = dish;
-                row.appendChild(dishCell);
-
-                const categoryCell = document.createElement('td');
-                categoryCell.textContent = category;
-                row.appendChild(categoryCell);
-
-                table.appendChild(row);
-
-                // Clear the form after submission
-                document.getElementById('signupForm').reset();
-            } else {
-                alert('Please fill out all fields.');
-            }
-        }
-    </script>
     <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+      import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCWNypv1n3oMNRJ6Q21JaQgtausRTWZVkw",
-    authDomain: "thanksgiving-signup.firebaseapp.com",
-    projectId: "thanksgiving-signup",
-    storageBucket: "thanksgiving-signup.appspot.com",
-    messagingSenderId: "68679995084",
-    appId: "1:68679995084:web:d28736b3c36dbb64107c69",
-    measurementId: "G-2SDT3MH44P"
-  };
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+          apiKey: "AIzaSyCWNypv1n3oMNRJ6Q21JaQgtausRTWZVkw",
+          authDomain: "thanksgiving-signup.firebaseapp.com",
+          projectId: "thanksgiving-signup",
+          storageBucket: "thanksgiving-signup.appspot.com",
+          messagingSenderId: "68679995084",
+          appId: "1:68679995084:web:d28736b3c36dbb64107c69",
+          measurementId: "G-2SDT3MH44P"
+      };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-</body>
-</html>
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Function to load existing sign-ups
+      async function loadSignUps() {
+          const querySnapshot = await getDocs(collection(db, "signups"));
+          querySnapshot.forEach((doc) => {
+              const signup = doc.data();
+              addRo
+
